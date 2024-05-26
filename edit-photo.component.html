@@ -1,0 +1,8 @@
+<div class="edit-photo">
+    <h2>Change Profile Photo</h2>
+    <div>
+      <label for="photo">Photo:</label>
+      <input type="file" id="photo" (change)="onPhotoUpload($event)" accept="image/*">
+    </div>
+    <button mat-raised-button (click)="savePhoto()">Save Photo</button>
+  </div>

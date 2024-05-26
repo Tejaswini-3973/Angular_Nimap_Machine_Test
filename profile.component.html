@@ -1,0 +1,31 @@
+<div class="profile">
+    <header>
+      <h1>Your Profile</h1>
+      <nav>
+        <ul>
+          <li><a routerLink="/">Home</a></li>
+          <li><button mat-button (click)="openEditProfile()">Edit Profile</button></li>
+          <li><a routerLink="/profile">Profile</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main *ngIf="userData">
+      <section>
+        <img [src]="userData.photo | safeUrl" alt="Profile Photo">
+        <button mat-button (click)="openEditPhoto()">Edit Photo</button>
+        <p>Username: {{userData.username}}</p>
+        <p>First Name: {{userData.firstName}}</p>
+        <p>Email: {{userData.email}}</p>
+        <p>Age: {{userData.age}}</p>
+        <p>Interests: <span *ngFor="let interest of userData.interests">{{interest}}</span></p>
+        <div *ngIf="userData.addressType === 'home'">
+          <p>Address 1: {{userData.address1}}</p>
+          <p>Address 2: {{userData.address2}}</p>
+        </div>
+        <div *ngIf="userData.addressType === 'company'">
+          <p>Company Address 1: {{userData.address1}}</p>
+          <p>Company Address 2: {{userData.address2}}</p>
+        </div>
+      </section>
+    </main>
+  </div>

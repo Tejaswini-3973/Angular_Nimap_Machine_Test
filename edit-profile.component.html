@@ -1,0 +1,65 @@
+<div class="edit-profile">
+    <h2>Edit Your Profile</h2>
+    <form (ngSubmit)="onSubmit()" #editProfileForm="ngForm">
+      <div>
+        <mat-form-field>
+          <mat-label>Username</mat-label>
+          <input matInput type="text" id="username" name="username" [(ngModel)]="userData.username" required>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>First Name</mat-label>
+          <input matInput type="text" id="firstName" name="firstName" [(ngModel)]="userData.firstName" required pattern="[A-Za-z]{1,20}">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput type="email" id="email" name="email" [(ngModel)]="userData.email" required>
+        </mat-form-field>
+      </div>
+      <div>
+        <label for="age">Age:</label>
+        <mat-slider min="18" max="100" step="1" [(ngModel)]="userData.age" name="age"></mat-slider>
+        <span>{{userData.age}}</span>
+      </div>
+      <div>
+        <label for="interests">Interests:</label>
+        <input matInput type="text" id="interests" [(ngModel)]="newInterest" (keydown.enter)="addInterest($event)">
+        <div class="tags">
+          <span *ngFor="let interest of userData.interests" (click)="removeInterest(interest)">{{interest}}</span>
+        </div>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Address Type</mat-label>
+          <mat-select id="addressType" name="addressType" [(ngModel)]="userData.addressType" (selectionChange)="onAddressTypeChange($event)">
+            <mat-option value="home">Home</mat-option>
+            <mat-option value="company">Company</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div *ngIf="userData.addressType === 'home'">
+        <mat-form-field>
+          <mat-label>Address1</mat-label>
+          <input matInput type="text" id="address1" name="address1" [(ngModel)]="userData.address1" required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Address2</mat-label>
+          <input matInput type="text" id="address2" name="address2" [(ngModel)]="userData.address2">
+        </mat-form-field>
+      </div>
+      <div *ngIf="userData.addressType === 'company'">
+        <mat-form-field>
+          <mat-label>Company Address 1</mat-label>
+          <input matInput type="text" id="companyAddress1" name="companyAddress1" [(ngModel)]="userData.address1" required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Company Address 2</mat-label>
+          <input matInput type="text" id="companyAddress2" name="companyAddress2" [(ngModel)]="userData.address2">
+        </mat-form-field>
+      </div>
+      <button mat-raised-button type="submit">Save Changes</button>
+    </form>
+  </div>
